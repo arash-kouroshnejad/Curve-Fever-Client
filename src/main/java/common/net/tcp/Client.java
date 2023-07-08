@@ -6,6 +6,6 @@ public class Client {
     public static void main(String[] args) throws IOException {
         var connection = new TCPConnection();
         connection.connectTo("localhost", 9000, "localhost", 8000);
-        System.out.println(connection.fetch());
+        System.out.println(connection.fetch().command.headers);
     }
 }

@@ -6,14 +6,15 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public abstract class Navigable extends JFrame implements MouseListener {
+public abstract class Navigable extends JFrame implements MouseListener{
     protected FrameController controller;
     protected final JPanel mainPanel;
 
 
     public Navigable() {
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setUndecorated(true);
+        /*setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setUndecorated(true);*/
+        setSize(new Dimension(500, 500));
         mainPanel = new JPanel();
         setContentPane(mainPanel);
         mainPanel.setLayout(new BorderLayout());

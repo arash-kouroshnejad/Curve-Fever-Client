@@ -13,7 +13,7 @@ public class Receive extends Thread {
     private final AbstractAgent agent;
     private boolean started;
     private final Semaphore semaphore = new Semaphore(0);
-    private boolean paused;
+    private boolean paused = true;
     private boolean killed;
     private Runnable retrievalAction;
 
@@ -102,10 +102,9 @@ public class Receive extends Thread {
         @Override
         public void run() {
             try {
-                /*if (connection == entity.getTcp())
-                    System.out.println("waiting on tcp of " + entity.getId());*/
                 var packet = connection.fetch();
                 stack.routePacket(packet, entity, agent);
+                System.out.println(packet.command.headers);
                 if (action != null)
                     action.run();
             } catch (IOException e) {

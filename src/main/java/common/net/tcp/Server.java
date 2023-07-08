@@ -9,6 +9,6 @@ public class Server {
     public static void main(String[] args) throws IOException {
         var listener = new TCPListener();
         var connection = listener.listen(9000);
-        connection.send(new Packet(new Command(null), 1000));
+        connection.send(new Packet(new Command(null).addHeader("test", "test"), 1000));
     }
 }

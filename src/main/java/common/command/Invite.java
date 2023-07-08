@@ -7,7 +7,7 @@ public class Invite extends Command {
 
     public Invite(Entity recipient) {
         super(recipient);
-        addHeader("connection-type", "udp");
+        addHeader("connection-type", "tcp");
         addHeader("type", "invite");
     }
 

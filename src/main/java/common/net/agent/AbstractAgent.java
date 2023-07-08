@@ -51,7 +51,7 @@ public abstract class AbstractAgent {
         receive.restart();
     }
 
-    protected void disableReceiving() {
+    public void disableReceiving() {
         receive.pause();
     }
 
@@ -70,24 +70,12 @@ public abstract class AbstractAgent {
     }
 
     public void send(Command command) {
-        if (command.getRecipient() == null)
+        if (command.getEntity() == null)
             throw new RuntimeException("Command recipient not set !");
-        send(command, command.getRecipient());
+        send(command, command.getEntity());
     }
 
     public abstract void syncID(Entity entity) throws IOException;
-
-    /*protected Command getCommand(Entity entity, ConnectionType type) throws HostUnreachableException {
-        if (!entities.contains(entity)) {
-            throw new HostUnreachableException();
-        }
-        try {
-            return type.getConnection(entity).fetch().command;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        throw new HostUnreachableException();
-    }*/
 
     protected void terminateConnection(Entity entity) throws IOException {
         entities.remove(entity);

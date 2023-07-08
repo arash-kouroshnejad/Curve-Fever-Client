@@ -1,6 +1,5 @@
 package common.net.agent;
 
-import common.net.data.ConnectionType;
 import common.net.data.Packet;
 
 import java.io.IOException;

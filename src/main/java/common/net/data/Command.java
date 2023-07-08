@@ -10,15 +10,10 @@ import java.util.Map;
 public class Command implements Serializable, Runnable {
     public final Map headers = new HashMap<>();
     @Getter
-    protected transient Entity recipient;
+    protected transient Entity entity;
 
-    public Command (Entity recipient) {
-        this.recipient = recipient;
-    }
-
-    public Command(Command original, Entity recipient) {
-        headers.putAll(original.headers);
-        this.recipient = recipient;
+    public Command (Entity entity) {
+        this.entity = entity;
     }
 
 
@@ -31,10 +26,10 @@ public class Command implements Serializable, Runnable {
         return headers.get(key);
     }
 
-    public boolean isValid(Command command) {return true;};
+    public boolean isValid(Command command) {return true;}
 
     @Override
     public void run() {
 
-    }
+    } // executed upon receive
 }

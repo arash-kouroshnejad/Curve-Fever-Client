@@ -1,7 +1,6 @@
-package common.core.util;
+package common.gfx.util;
 
-import common.core.objects.DynamicElement;
-import common.core.objects.Layers;
+import common.gfx.objects.DynamicElement;
 
 import java.awt.*;
 
@@ -14,7 +13,6 @@ public abstract class Logic {
     public void setLockedElement(DynamicElement lockedElement) {
         this.lockedElement = lockedElement;
     }
-    protected final Layers layers = Layers.getInstance();
     public abstract void handleKeyPress(int keyCode);
     public abstract void handleKeyRelease(int keyCode);
     public abstract void handleMouseClick(int x, int y);

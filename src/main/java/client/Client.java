@@ -1,18 +1,17 @@
 package client;
 
+import client.tasks.Connect;
 import common.net.agent.AbstractAgent;
-import common.net.agent.Ping;
 import common.net.data.Command;
 import common.net.data.Entity;
-import common.net.tcp.TCPConnection;
-import common.net.udp.UDPConnection;
 import common.policies.NetworkPolicies;
 
 import java.io.IOException;
+import java.util.concurrent.Executors;
 
 public class Client extends AbstractAgent {
     String remoteName = "localhost";
-    int remotePort = 9000;
+    int remotePort = 9001;
     boolean connected;
     Entity server;
 
@@ -20,19 +19,14 @@ public class Client extends AbstractAgent {
         super(new NetworkPolicies(), 1);
     }
 
-    private void connect() throws IOException {
-        var tcpConnection = new TCPConnection();
-        tcpConnection.connectTo(remoteName, remotePort, "localhost", 0);
-        var udpConnection = new UDPConnection();
-        udpConnection.connectTo(remoteName, remotePort, "localhost", 0);
-        var server = new Entity(tcpConnection, udpConnection, 0);
-        entities.add(server);
-        syncID(server);
-        System.out.println("Client connected to remote host : " + remoteName + ":" + remotePort);
-        enableReceiving();
-        new Ping(this, policies).start();
-        this.server = server;
+    public void init() {this.pool = Executors.newSingleThreadExecutor();}
+
+    private void connect() {
+        var connectTask = new Connect(remoteName, remotePort, this, policies);
+        connectTask.run();
+        server = connectTask.getServer();
     }
+
     public void start() throws IOException {
         if (!connected)
             connect();

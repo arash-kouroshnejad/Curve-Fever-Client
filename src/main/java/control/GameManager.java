@@ -1,6 +1,7 @@
 package control;
 
 import UI.FrameController;
+import UI.lobby.LobbyController;
 import UI.setup.SetupController;
 import UI.welcome.WelcomeController;
 import client.Client;
@@ -27,9 +28,11 @@ public class GameManager {
 
     private final FrameController welcomeController = new WelcomeController();
     private final FrameController setupController = new SetupController();
+    private final LobbyController lobbyController = new LobbyController();
 
     public void start() {
         client.setRetrievalAction(new RetrievalBehaviour(client, new Validator()));
+        client.init();
         try {
             client.start();
         } catch (IOException e) {
@@ -52,7 +55,25 @@ public class GameManager {
     }
 
     public void setName(String name) {
-        client.send(commandFactory.setName(client.getServer()).addHeader("name", name));
+        client.send(commandFactory.setName(client.getServer(), name));
+    }
+
+    public void showLobby(String[] users) {
+        setupController.hide();
+        lobbyController.show();
+        lobbyController.setUsers(users);
+    }
+
+    public void showOffer(String from) {
+        lobbyController.showOffer(from);
+    }
+
+    public void invitePlayer(String playerName) {
+        client.send(commandFactory.invite(client.getServer(), playerName));
+    }
+
+    public void accept(String name) {
+        client.send(commandFactory.result(client.getServer(), "acc", name));
     }
 
     public void execute(Command command) {

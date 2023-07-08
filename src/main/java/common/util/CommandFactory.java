@@ -13,23 +13,27 @@ public class CommandFactory {
         return new Register(recipient);
     }
 
-    public Command setName(Entity recipient) {
-        return new SetName(recipient);
+    public Command setName(Entity recipient, String name) {
+        return new SetName(recipient).addHeader("name", name);
     }
 
     public Command list(Entity recipient) {
         return new List(recipient);
     }
 
-    public Command Offer(Entity recipient) {
-        return new Offer(recipient);
+    public Command Offer(Entity recipient, String from) {
+        return new Offer(recipient).addHeader("from", from);
     }
 
-    public Command result(Entity recipient) {
-        return new Result(recipient);
+    public Command result(Entity recipient, String result, String name) {
+        return new Result(recipient).addHeader("result", result).addHeader("name", name);
     }
 
-    public Command invite(Entity recipient) {
-        return new Invite(recipient);
+    public Command invite(Entity recipient, String to) {
+        return new Invite(recipient).addHeader("to", to);
+    }
+
+    public Command info(Entity recipient, String message) {
+        return new Info(recipient).addHeader("info", message);
     }
 }

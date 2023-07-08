@@ -2,12 +2,13 @@ package common.command;
 
 import common.net.data.Command;
 import common.net.data.Entity;
+import control.GameManager;
 
 public class Offer extends Command {
 
     public Offer(Entity recipient) {
         super(recipient);
-        addHeader("connection-type", "udp");
+        addHeader("connection-type", "tcp");
         addHeader("type", "offer");
     }
 
@@ -23,6 +24,6 @@ public class Offer extends Command {
 
     @Override
     public void run() {
-
+        GameManager.getInstance().showOffer((String) getHeader("from"));
     }
 }
