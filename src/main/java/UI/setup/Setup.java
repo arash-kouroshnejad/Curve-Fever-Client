@@ -44,7 +44,6 @@ public class Setup extends Navigable {
     private void $$$setupUI$$$() {
         panel1 = new JPanel();
         panel1.setLayout(new GridBagLayout());
-        panel1.setForeground(new Color(-16777216));
         final JLabel label1 = new JLabel();
         label1.setEnabled(false);
         Font label1Font = this.$$$getFont$$$(null, -1, 36, label1.getFont());
@@ -120,4 +119,5 @@ public class Setup extends Navigable {
     public JComponent $$$getRootComponent$$$() {
         return panel1;
     }
+
 }

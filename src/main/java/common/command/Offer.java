@@ -4,7 +4,11 @@ import common.net.data.Command;
 import common.net.data.Entity;
 import control.GameManager;
 
+import java.io.Serial;
+
 public class Offer extends Command {
+    @Serial
+    private static final long serialVersionUID = 4622476813573410587L;
 
     public Offer(Entity recipient) {
         super(recipient);

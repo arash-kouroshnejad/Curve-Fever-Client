@@ -18,6 +18,8 @@ public class Validator extends PacketValidator {
         commandList.add(new Offer(null));
         commandList.add(new Result(null));
         commandList.add(new Info(null));
+        commandList.add(new Begin(null));
+        commandList.add(new Sync(null));
     }
     @Override
     public void validate(Packet incoming) {

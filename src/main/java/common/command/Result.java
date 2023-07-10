@@ -3,7 +3,11 @@ package common.command;
 import common.net.data.Command;
 import common.net.data.Entity;
 
+import java.io.Serial;
+
 public class Result extends Command {
+    @Serial
+    private static final long serialVersionUID = 1880671560898363549L;;
 
     public Result(Entity recipient) {
         super(recipient);
@@ -19,8 +23,8 @@ public class Result extends Command {
     @Override
     public boolean isValid(Command command) {
         var result = command.getHeader("result");
-        return "result".equals(command.getHeader("type")) && ( "acc".equals(result) || "rej".equals(result)
-        && getHeader("name") instanceof String);
+        return "result".equals(command.getHeader("type")) && ( "acc".equals(result) || "rej".equals(result))
+        && command.getHeader("name") instanceof String;
     }
 
     @Override

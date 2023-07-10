@@ -26,6 +26,11 @@
             <artifactId>forms_rt</artifactId>
             <version>7.0.3</version>
         </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20230227</version>
+        </dependency>
     </dependencies>
 
     <properties>

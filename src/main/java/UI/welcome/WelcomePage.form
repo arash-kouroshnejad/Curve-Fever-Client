@@ -17,7 +17,7 @@
         <properties>
           <enabled value="false"/>
           <font size="72"/>
-          <foreground color="-11510689"/>
+          <foreground/>
           <horizontalAlignment value="0"/>
           <text value="Curve Fever"/>
         </properties>
@@ -40,7 +40,7 @@
           <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
-          <foreground color="-11510689"/>
+          <foreground/>
           <text value="Join Server"/>
         </properties>
       </component>

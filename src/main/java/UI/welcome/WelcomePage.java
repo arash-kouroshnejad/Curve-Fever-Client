@@ -42,7 +42,6 @@ public class WelcomePage extends Navigable {
         label1.setEnabled(false);
         Font label1Font = this.$$$getFont$$$(null, -1, 72, label1.getFont());
         if (label1Font != null) label1.setFont(label1Font);
-        label1.setForeground(new Color(-11510689));
         label1.setHorizontalAlignment(0);
         label1.setText("Curve Fever");
         GridBagConstraints gbc;
@@ -63,7 +62,6 @@ public class WelcomePage extends Navigable {
         gbc.fill = GridBagConstraints.VERTICAL;
         panel1.add(spacer2, gbc);
         joinButton = new JLabel();
-        joinButton.setForeground(new Color(-11510689));
         joinButton.setText("Join Server");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -99,4 +97,5 @@ public class WelcomePage extends Navigable {
     public JComponent $$$getRootComponent$$$() {
         return panel1;
     }
+
 }

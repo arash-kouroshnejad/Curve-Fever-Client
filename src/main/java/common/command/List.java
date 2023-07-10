@@ -4,10 +4,13 @@ import common.net.data.Command;
 import common.net.data.Entity;
 import control.GameManager;
 
+import java.io.Serial;
 import java.util.Arrays;
 
 public class List extends Command {
 
+    @Serial
+    private static final long serialVersionUID = -6818529734159577152L;
     public List(Entity recipient) {
         super(recipient);
         addHeader("connection-type", "tcp");

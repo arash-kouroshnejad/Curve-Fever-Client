@@ -5,10 +5,13 @@ import UI.lobby.LobbyController;
 import UI.setup.SetupController;
 import UI.welcome.WelcomeController;
 import client.Client;
+import common.game.logic.Colour;
 import common.net.data.Command;
+import common.persistence.Config;
 import common.policies.RetrievalBehaviour;
 import common.policies.Validator;
 import common.util.CommandFactory;
+import game.GameContainer;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
@@ -24,13 +27,16 @@ public class GameManager {
 
     private final Client client = new Client();
 
-    private final CommandFactory commandFactory = new CommandFactory();
+    private GameContainer gameContainer;
 
     private final FrameController welcomeController = new WelcomeController();
+
     private final FrameController setupController = new SetupController();
+
     private final LobbyController lobbyController = new LobbyController();
 
     public void start() {
+        Config.getInstance().setPath("./src/main/resources/Config.properties");
         client.setRetrievalAction(new RetrievalBehaviour(client, new Validator()));
         client.init();
         try {
@@ -51,11 +57,11 @@ public class GameManager {
     }
 
     public void joinServer() {
-        client.send(commandFactory.join(client.getServer()));
+        client.send(CommandFactory.join(client.getServer()));
     }
 
     public void setName(String name) {
-        client.send(commandFactory.setName(client.getServer(), name));
+        client.send(CommandFactory.setName(client.getServer(), name));
     }
 
     public void showLobby(String[] users) {
@@ -69,11 +75,27 @@ public class GameManager {
     }
 
     public void invitePlayer(String playerName) {
-        client.send(commandFactory.invite(client.getServer(), playerName));
+        client.send(CommandFactory.invite(client.getServer(), playerName));
     }
 
     public void accept(String name) {
-        client.send(commandFactory.result(client.getServer(), "acc", name));
+        client.send(CommandFactory.result(client.getServer(), "acc", name));
+    }
+
+    public void setUpFrame(String colourName) {
+        var colour = Colour.getColor(colourName);
+        if (colour.isEmpty())
+            return;
+        lobbyController.hide();
+        gameContainer = new GameContainer(colour.get());
+    }
+
+    public void syncWorlds(String worldState) {
+        gameContainer.sync(worldState);
+    }
+
+    public void sendKeyEvent(int keyCode, boolean pressed) {
+        client.send(CommandFactory.keyPressed(client.getServer(), keyCode, pressed));
     }
 
     public void execute(Command command) {

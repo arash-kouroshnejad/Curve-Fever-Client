@@ -4,7 +4,7 @@ import client.tasks.Connect;
 import common.net.agent.AbstractAgent;
 import common.net.data.Command;
 import common.net.data.Entity;
-import common.policies.NetworkPolicies;
+import common.policies.NetRules;
 
 import java.io.IOException;
 import java.util.concurrent.Executors;
@@ -16,7 +16,7 @@ public class Client extends AbstractAgent {
     Entity server;
 
     public Client() {
-        super(new NetworkPolicies(), 1);
+        super(new NetRules(), 1);
     }
 
     public void init() {this.pool = Executors.newSingleThreadExecutor();}

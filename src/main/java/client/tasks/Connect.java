@@ -1,8 +1,7 @@
 package client.tasks;
 
 import common.net.agent.AbstractAgent;
-import common.net.agent.Ping;
-import common.net.agent.PolicyStack;
+import common.net.agent.NetworkingPolicies;
 import common.net.data.Entity;
 import common.net.tcp.TCPConnection;
 import common.net.udp.UDPConnection;
@@ -15,10 +14,10 @@ public class Connect implements Runnable{
     int remotePort;
     AbstractAgent self;
     Entity server;
-    PolicyStack policies;
+    NetworkingPolicies policies;
 
 
-    public Connect(String remoteName, int remotePort, AbstractAgent self, PolicyStack policies) {
+    public Connect(String remoteName, int remotePort, AbstractAgent self, NetworkingPolicies policies) {
         this.remoteName = remoteName;
         this.remotePort = remotePort;
         this.self = self;

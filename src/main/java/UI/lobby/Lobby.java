@@ -24,6 +24,7 @@ public class Lobby extends Navigable {
         users.setLayout(new BoxLayout(users, BoxLayout.Y_AXIS));
         users.setPreferredSize(new Dimension(400, 600));
         cancel.addMouseListener(this);
+        cancel.setName("back");
         cancel.setPreferredSize(new Dimension(50, 50));
     }
 

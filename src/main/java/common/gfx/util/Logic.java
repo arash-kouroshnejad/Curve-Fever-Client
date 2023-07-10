@@ -17,7 +17,6 @@ public abstract class Logic {
     public abstract void handleKeyRelease(int keyCode);
     public abstract void handleMouseClick(int x, int y);
     public abstract void check();
-    public abstract void init(Loader loader);
     public abstract void stop();
     public abstract void resume();
     public abstract  void reset();
