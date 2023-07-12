@@ -5,7 +5,6 @@ import common.net.data.Entity;
 import control.GameManager;
 
 import java.io.Serial;
-import java.util.Arrays;
 
 public class List extends Command {
 

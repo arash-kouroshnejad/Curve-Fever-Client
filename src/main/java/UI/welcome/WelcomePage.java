@@ -13,6 +13,7 @@ public class WelcomePage extends Navigable {
     private JLabel joinButton;
 
     public WelcomePage() {
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         mainPanel.add(panel1, BorderLayout.CENTER);
         panel1.setPreferredSize(new Dimension(400, 400));
         // panel1.setBackground(Color.BLACK);

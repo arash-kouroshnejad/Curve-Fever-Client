@@ -1,10 +1,10 @@
-package game;
+package game.logic;
 
 
 import common.game.logic.AbstractLogic;
 import common.game.logic.Colour;
-import game.policy.KeyStack;
 import common.gfx.objects.DynamicElement;
+import game.policy.KeyStack;
 
 public class GameLogic extends AbstractLogic {
     private KeyStack keyStack;

@@ -14,6 +14,7 @@ import common.util.CommandFactory;
 import game.GameContainer;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -90,12 +91,17 @@ public class GameManager {
         gameContainer = new GameContainer(colour.get());
     }
 
-    public void syncWorlds(String worldState) {
-        gameContainer.sync(worldState);
+    public void syncWorlds(Map<?, ?> headers) {
+        gameContainer.sync(headers);
     }
 
     public void sendKeyEvent(int keyCode, boolean pressed) {
         client.send(CommandFactory.keyPressed(client.getServer(), keyCode, pressed));
+    }
+
+    public void terminateGame() {
+        gameContainer.killGame();
+        setupController.show();
     }
 
     public void execute(Command command) {

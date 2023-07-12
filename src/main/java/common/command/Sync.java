@@ -29,6 +29,6 @@ public class Sync extends Command {
 
     @Override
     public void run() {
-        GameManager.getInstance().syncWorlds((String) getHeader("state"));
+        GameManager.getInstance().syncWorlds((headers));
     }
 }

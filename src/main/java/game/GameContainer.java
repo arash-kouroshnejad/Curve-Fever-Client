@@ -7,14 +7,15 @@ import common.gfx.editor.LevelEditor;
 import common.gfx.objects.DynamicElement;
 import common.gfx.render.GameEngine;
 import common.persistence.Config;
+import common.util.Routine;
+import game.logic.GameLogic;
 import game.policy.KeyStack;
 import game.policy.policies.LEFT;
 import game.policy.policies.RIGHT;
-import org.json.JSONArray;
-import org.json.JSONException;
+import game.util.Sync;
 
-import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 public class GameContainer {
     final List<DynamicElement> dynamics;
@@ -22,6 +23,11 @@ public class GameContainer {
     final GameEngine engine;
     final LevelEditor levelEditor;
     final GameLogic gameLogic;
+    final Routine logicLoop;
+    final KeyStack keyStack;
+    final Sync sync;
+
+
 
     public GameContainer (Colour colour) {
         engine = new GameEngine();
@@ -33,39 +39,22 @@ public class GameContainer {
         levelEditor.enableHeadless(gameLoader, engine);
         gameLogic.init(levelEditor);
         gameLogic.setPlayer(colour);
-        var logicLoop = new LogicLoop(gameLogic);
+        logicLoop = new LogicLoop(gameLogic);
         logicLoop.start();
         dynamics = levelEditor.getLayers().getALL_LAYERS().get(dynamicsLayer).getDynamicElements();
-        var stack = KeyStack.getInstance().getKeyPolicies();
-        stack.add(new RIGHT());
-        stack.add(new LEFT());
+        keyStack = KeyStack.getInstance();
+        keyStack.getKeyPolicies().add(new RIGHT());
+        keyStack.getKeyPolicies().add(new LEFT());
+        sync = new Sync(levelEditor);
     }
 
-    public void sync(String json) {
-        JSONArray array;
-        try {
-            array = new JSONArray(json);
+    public void killGame() {
+        keyStack.disableKeys();
+        gameLogic.killGame();
+        engine.closeGame();
+    }
 
-        } catch (JSONException exception) {
-            exception.printStackTrace();
-            return;
-        }
-        try {
-            for (int i = 0; i < array.length(); i++) {
-                var element = array.getJSONObject(i);
-                var type = (String)element.get("type");
-                var x = (int) element.get("x");
-                var y = (int )element.get("y");
-                var speedX = ((BigDecimal) element.get("speedX")).doubleValue();
-                var speedY = ((BigDecimal) element.get("speedY")).doubleValue();
-                for (var dynamic : dynamics)
-                    if (dynamic.getType().equals(type)) {
-                        dynamic.setX(x);
-                        dynamic.setY(y);
-                        dynamic.setSpeedX(speedX);
-                        dynamic.setSpeedY(speedY);
-                    }
-            }
-        } catch (ClassCastException | NumberFormatException ignored) {}
+    public void sync(Map<?, ?> headers) {
+        sync.updateGame(headers);
     }
 }

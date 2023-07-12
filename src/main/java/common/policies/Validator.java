@@ -10,16 +10,15 @@ import control.GameManager;
 public class Validator extends PacketValidator {
     private final GameManager manager = GameManager.getInstance();
     public Validator() {
-        // commandList.add(new Join(null));
         commandList.add(new Register(null));
-        // commandList.add(new SetName(null));
         commandList.add(new List(null));
-        // commandList.add(new Invite(null));
         commandList.add(new Offer(null));
         commandList.add(new Result(null));
         commandList.add(new Info(null));
         commandList.add(new Begin(null));
         commandList.add(new Sync(null));
+        commandList.add(new Terminate(null));
+        commandList.add(new Drop(null));
     }
     @Override
     public void validate(Packet incoming) {
