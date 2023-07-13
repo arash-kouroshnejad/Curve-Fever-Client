@@ -23,12 +23,15 @@ public class Sync {
     }
 
     public void updateGame(Map<?, ?> input) {
-        if (input.containsKey("state"))
-            apply((String) input.get("state"));
-        else if (input.containsKey("layer"))
-            dropLayer((int) input.get("layer"));
-        else
-            dropElement((String)input.get("element"));
+        var state = input.get("state");
+        var layer = input.get("layer");
+        var element = input.get("element");
+        if (state != null)
+            apply((String) state);
+        if (layer != null)
+            dropLayer((int) layer);
+        if (element != null)
+            dropElement((String) element);
     }
 
     private void dropElement(String elementType) {

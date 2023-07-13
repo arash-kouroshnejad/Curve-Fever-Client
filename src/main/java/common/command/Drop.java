@@ -26,10 +26,8 @@ public class Drop extends Command {
 
     @Override
     public boolean isValid(Command command) {
-        if ("drop".equals(command.getHeader("type")))
-            return (command.getHeader("layer") instanceof Integer ||
+        return  ("drop".equals(command.getHeader("type"))) && (command.getHeader("layer") instanceof Integer ||
                     command.getHeader("element") instanceof String);
-        return false;
     }
 
     @Override
