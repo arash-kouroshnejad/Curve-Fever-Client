@@ -3,6 +3,7 @@ package client.tasks;
 import common.net.agent.AbstractAgent;
 import common.net.agent.NetworkingPolicies;
 import common.net.data.Entity;
+import common.net.rdp.RDPConnection;
 import common.net.tcp.TCPConnection;
 import common.net.udp.UDPConnection;
 
@@ -37,12 +38,6 @@ public class Connect implements Runnable{
             e.printStackTrace();
         }
         var server = new Entity(tcpConnection, udpConnection, 0);
-        /*try {
-            self.syncID(server);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-        // new Ping(self, policies).start();
         this.server = server;
         self.registerEntity(server);
         System.out.println("Client connected to remote host : " + remoteName + ":" + remotePort);

@@ -2,6 +2,7 @@ package common.net.agent;
 
 import common.net.Connection;
 import common.net.data.Entity;
+import common.net.udp.UDPConnection;
 import common.util.Semaphore;
 
 import java.util.concurrent.ExecutorService;
@@ -103,7 +104,6 @@ public class Receive extends Thread {
             try {
                 var packet = connection.fetch();
                 stack.routePacket(packet, entity, agent);
-                // System.out.println(packet.command.headers);
                 if (action != null)
                     action.run();
             } catch (Exception e) {
