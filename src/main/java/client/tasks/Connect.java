@@ -32,7 +32,7 @@ public class Connect implements Runnable{
         try {
             tcpConnection = new TCPConnection();
             tcpConnection.connectTo(remoteName, remotePort, "localhost", 0);
-            udpConnection = new UDPConnection();
+            udpConnection = new RDPConnection();
             udpConnection.connectTo(remoteName, remotePort, "localhost", 0);
         } catch (IOException e) {
             e.printStackTrace();

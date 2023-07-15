@@ -3,6 +3,7 @@ package common.net.agent;
 import common.net.data.Command;
 import common.net.data.Entity;
 import common.net.data.Packet;
+import common.net.rdp.RDPListener;
 import common.net.tcp.TCPListener;
 import common.net.udp.UDPListener;
 
@@ -23,7 +24,7 @@ public abstract class AbstractAgent {
     protected final Receive receive;
     protected ExecutorService pool;
     protected final TCPListener tcpListener = new TCPListener();
-    protected final UDPListener udpListener = new UDPListener();
+    protected final UDPListener udpListener = new RDPListener();
     protected final NetworkingPolicies policies;
     protected final int capacity;
 
